@@ -1,14 +1,14 @@
 # Drop Tutorial
 
-I followed the tutorial on this website https://libgdx.com/wiki/start/setup to evaluate libGDX
+I followed the tutorial on this website https://libgdx.com/wiki/start/setup to evaluate libGDX.
 
-Run one of the following commands to compile and run the game
+Run one of the following commands to compile and run the game.
 
 ### HTML
 
 gradlew html:superDev
 
-goto http://localhost:8080/index.html
+Browse to http://localhost:8080/index.html
 
 ### PC
 
@@ -16,7 +16,7 @@ gradlew desktop:run
 
 ### Android
 
-In android studio have a device running
+In android studio have an emulated or a real device running.
 
 gradlew android:installDebug android:run
 
@@ -24,6 +24,6 @@ gradlew android:installDebug android:run
 
 gradlew ios:launchIPhoneSimulator
 
-### Debug add
+### Debug
 
---debug
+add "--debug" to the line you are running.
