@@ -11,6 +11,7 @@ PC
 gradlew desktop:run
 
 Android
+In android studio have a device running
 gradlew android:installDebug android:run
 
 iOS
