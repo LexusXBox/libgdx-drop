@@ -1,6 +1,8 @@
 # Drop Tutorial
 
-commands to compile and run
+I followed the tutorial on this website https://libgdx.com/wiki/start/setup to evaluate libGDX
+
+Run one of the following commands to compile and run the game
 
 ### HTML
 
