@@ -8,20 +8,20 @@ gradlew html:superDev
 
 goto http://localhost:8080/index.html
 
-PC
+### PC
 
 gradlew desktop:run
 
-Android
+### Android
 
 In android studio have a device running
 
 gradlew android:installDebug android:run
 
-iOS
+### iOS
 
 gradlew ios:launchIPhoneSimulator
 
-for Debug add
+### Debug add
 
 --debug
