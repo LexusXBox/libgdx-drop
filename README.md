@@ -1,8 +1,8 @@
-## Drop Tutorial
+# Drop Tutorial
 
 commands to compile and run
 
-# HTML
+### HTML
 
 gradlew html:superDev
 
