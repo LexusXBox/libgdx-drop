@@ -7,6 +7,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -71,19 +73,21 @@ public class Drop extends ApplicationAdapter {
 
    @Override
    public void render() {
+      Array<Controller> controllers = Controllers.getControllers();
+	   
       // clear the screen with a dark blue color. The
       // arguments to clear are the red, green
       // blue and alpha component in the range [0,1]
       // of the color to be used to clear the screen.
       ScreenUtils.clear(0, 0, 0.2f, 1);
-
+      
       // tell the camera to update its matrices.
       camera.update();
-
+      
       // tell the SpriteBatch to render in the
       // coordinate system specified by the camera.
       batch.setProjectionMatrix(camera.combined);
-
+      
       // begin a new batch and draw the bucket and
       // all drops
       batch.begin();
@@ -92,8 +96,22 @@ public class Drop extends ApplicationAdapter {
          batch.draw(dropImage, raindrop.x, raindrop.y);
       }
       batch.end();
-
+      
       // process user input
+      if(controllers.size==0){
+         System.out.println("No Controller");
+      } else {
+         Controller pad = null;
+         for(Controller c : controllers) {
+            pad = c;
+            if(pad!=null) {
+               if(pad.getButton(XBox.BUTTON_A)) {
+                  System.out.println("A button pressed");
+               }
+               bucket.x += (300 * pad.getAxis(XBox.AXIS_LX)) * Gdx.graphics.getDeltaTime();;
+            }
+         }
+      }
       if(Gdx.input.isTouched()) {
          Vector3 touchPos = new Vector3();
          touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
