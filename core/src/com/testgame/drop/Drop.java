@@ -42,7 +42,7 @@ public class Drop extends ApplicationAdapter {
 
       // start the playback of the background music immediately
       rainMusic.setLooping(true);
-      rainMusic.play();
+      // rainMusic.play();
 
       // create the camera and the SpriteBatch
       camera = new OrthographicCamera();
@@ -108,7 +108,7 @@ public class Drop extends ApplicationAdapter {
                if(pad.getButton(XBox.BUTTON_A)) {
                   System.out.println("A button pressed");
                }
-               bucket.x += (300 * pad.getAxis(XBox.AXIS_LX)) * Gdx.graphics.getDeltaTime();;
+               bucket.x = 400+(400 * pad.getAxis(XBox.AXIS_LX));
             }
          }
       }
@@ -136,7 +136,7 @@ public class Drop extends ApplicationAdapter {
          raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
          if(raindrop.y + 64 < 0) iter.remove();
          if(raindrop.overlaps(bucket)) {
-            dropSound.play();
+            // dropSound.play();
             iter.remove();
          }
       }
