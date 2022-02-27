@@ -11,7 +11,10 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -20,7 +23,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class Drop extends ApplicationAdapter {
-   private Texture dropImage;
+   private TextureAtlas enemyTextureAtlas;
+   private Sprite sprite;
+   private TextureRegion textureRegion;
    private Texture bucketImage;
    private Sound dropSound;
    private Music rainMusic;
@@ -33,8 +38,12 @@ public class Drop extends ApplicationAdapter {
    @Override
    public void create() {
       // load the images for the droplet and the bucket, 64x64 pixels each
-      dropImage = new Texture(Gdx.files.internal("droplet.png"));
-      bucketImage = new Texture(Gdx.files.internal("bucket.png"));
+	  enemyTextureAtlas = new TextureAtlas(Gdx.files.internal("enemy.atlas"));
+      textureRegion = enemyTextureAtlas.findRegion("pinkfloat0");
+      sprite = new Sprite(textureRegion);
+      sprite.setScale(20);
+      sprite.setPosition(100, 100);
+	  bucketImage = new Texture(Gdx.files.internal("bucket.png"));
 
       // load the drop sound effect and the rain background "music"
       dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
@@ -91,15 +100,13 @@ public class Drop extends ApplicationAdapter {
       // begin a new batch and draw the bucket and
       // all drops
       batch.begin();
-      batch.draw(bucketImage, bucket.x, bucket.y);
-      for(Rectangle raindrop: raindrops) {
-         batch.draw(dropImage, raindrop.x, raindrop.y);
-      }
+      sprite.setPosition(bucket.x, bucket.y);
+      sprite.draw(batch);
       batch.end();
       
       // process user input
       if(controllers.size==0){
-         System.out.println("No Controller");
+         // System.out.println("No Controller");
       } else {
          Controller pad = null;
          for(Controller c : controllers) {
@@ -120,7 +127,8 @@ public class Drop extends ApplicationAdapter {
       }
       if(Gdx.input.isKeyPressed(Keys.LEFT)) bucket.x -= 200 * Gdx.graphics.getDeltaTime();
       if(Gdx.input.isKeyPressed(Keys.RIGHT)) bucket.x += 200 * Gdx.graphics.getDeltaTime();
-
+      if(Gdx.input.isKeyPressed(Keys.UP)) bucket.y -= 200 * Gdx.graphics.getDeltaTime();
+      if(Gdx.input.isKeyPressed(Keys.DOWN)) bucket.y += 200 * Gdx.graphics.getDeltaTime();
       // make sure the bucket stays within the screen bounds
       if(bucket.x < 0) bucket.x = 0;
       if(bucket.x > 800 - 64) bucket.x = 800 - 64;
@@ -145,7 +153,6 @@ public class Drop extends ApplicationAdapter {
    @Override
    public void dispose() {
       // dispose of all the native resources
-      dropImage.dispose();
       bucketImage.dispose();
       dropSound.dispose();
       rainMusic.dispose();

@@ -1,0 +1,12 @@
+enemies-spritesheet.png
+size: 80, 240
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pinkfloat0
+  rotate: false
+  xy: 0, 81
+  size: 20, 20
+  orig: 80, 240
+  offset: 0, 0
+  index: -1
