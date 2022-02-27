@@ -26,4 +26,4 @@ gradlew ios:launchIPhoneSimulator
 
 ### Debug
 
-add "--debug" to the line you are running.
+add "--debug" to the line you are running."# space-demo" 
